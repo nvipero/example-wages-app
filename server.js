@@ -1,13 +1,16 @@
-var express = require("express");
-var Converter = require("csvtojson").Converter;
-var path = require("path");
+const express = require("express");
+const Converter = require("csvtojson").Converter;
+const path = require("path");
 var app = express();
 var jsonData = {};
+var port = process.env.PORT || 8080;
 
-app.use(express.static("public"));
+console.log(port);
+app.set("view engine", "ejs");
+app.use(express.static("dist"));
 
 app.get("/", function(req, res) {
-  res.sendFile(path.join(__dirname + "/dist/index.html"));
+  res.render("index");
 });
 
 app.get("/api", function (req, res) {
@@ -21,11 +24,11 @@ app.get("/api/person/:id", function (req, res) {
   }));
 });
 
-app.listen(3000, function () {
+app.listen(port, function () {
+  console.log("app is running on http://localhost:" + port);
+
   var converter = new Converter({headers: ["name", "person_id", "date", "startTime", "endTime"]});
   converter.fromFile("./data/HourList201403.csv", function(err, res) {
     jsonData = res;
   });
-
-  console.log("app running: localhost:3000");
 });

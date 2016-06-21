@@ -22,14 +22,6 @@ const common = {
     filename: "[name].js"
   },
 
-  plugins: [
-    new HtmlWebpackPlugin({
-      title: "Hello!",
-      template: PATHS.app + "/templates/index.ejs",
-      excludeChunks: ["style.[chunkhash].js"]
-    })
-  ],
-
   module: {
     preLoaders: [
       {
@@ -43,7 +35,7 @@ const common = {
         test: /\.js?$/,
         loaders: ["babel?cacheDirectory"],
         include: PATHS.app,
-        exclude: ["app.js"]
+        exclude: ["server.js"]
       }
     ]
   }

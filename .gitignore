@@ -1,5 +1,6 @@
 .idea/
 dist/
 node_modules/
-hello.iml
+example-wages-app.iml
 npm-debug.log
+.eslintcache
