@@ -21,7 +21,6 @@ var Wages = {
   },
 
   addItemToData: (item) => {
-    console.log(item);
     var personData = jsonData[item.person_id];
     if (!personData) {
       Wages.createNewDataItem(item);
