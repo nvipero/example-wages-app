@@ -1,0 +1,44 @@
+<section ng-hide="detailed" >
+    <h2>Monthly wages 03/2014</h2>
+    <table class="wages main" cellpadding="0" cellspacing="0">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Wage</th>
+        </tr>
+        <tr ng-repeat="item in wages" ng-click="app.stopEvent($event);app.showDetailed(item);">
+            <td>{{item.person_id}}</td>
+            <td>{{item.name}}</td>
+            <td>{{item.totalWage | wageFilter}}</td>
+        </tr>
+    </table>
+</section>
+
+<section ng-show="detailed">
+    <h2>Detailed information for: {{detailed.name}} ({{detailed.person_id}})</h2>
+    <a class="back" ng-click="app.stopEvent($event);app.clearDetailed();">Back to wages list</a>
+
+    <h3>Logged work:</h3>
+    <div ng-repeat="(key, day) in detailed.days" class="detailed-work">
+        <p>{{key}}:</p>
+        <table cellpadding="0" cellspacing="0" class="wages">
+            <tr>
+                <th>Start</th>
+                <th>End</th>
+                <th>Total wage</th>
+                <th class="extra">Basic wage</th>
+                <th class="extra">Evening compensation</th>
+                <th class="extra">Overtime compensation</th>
+            </tr>
+            <tr ng-repeat="work in day.work">
+                <td>{{work.start | date : "HH:mm"}}</td>
+                <td>{{work.end | date : "HH:mm"}}</td>
+                <td>{{work.wage + work.eveningC + work.overtimeC | wageFilter}}</td>
+                <td class="extra">{{work.wage | wageFilter}}</td>
+                <td class="extra">{{work.eveningC | wageFilter}}</td>
+                <td class="extra">{{work.overtimeC | wageFilter}}</td>
+            </tr>
+        </table>
+    </div>
+    <a class="back" ng-click="app.stopEvent($event);app.clearDetailed();">Back to wages list</a>
+</section>

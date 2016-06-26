@@ -6,7 +6,7 @@ const validate = require("webpack-validator");
 const parts = require("./config/parts");
 
 const PATHS = {
-  app: path.join(__dirname, "app"),
+    app: path.join(__dirname, "app"),
   build: path.join(__dirname, "dist"),
   style: path.join(__dirname, "app/sass", "main.scss")
 };
@@ -22,6 +22,13 @@ const common = {
     filename: "[name].js"
   },
 
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: PATHS.app + "/index.html",
+      excludeChunks: ["style.[chunkhash].js"]
+    })
+  ],
+
   module: {
     preLoaders: [
       {
@@ -36,6 +43,11 @@ const common = {
         loaders: ["babel?cacheDirectory"],
         include: PATHS.app,
         exclude: ["server.js"]
+      },
+      {
+        test: /\.html$/,
+        loader: "html",
+        include: PATHS.app
       }
     ]
   }
@@ -60,7 +72,7 @@ switch(process.env.npm_lifecycle_event) {
         "process.env.NODE_ENV",
         "production"
       ),
-      parts.minify(),
+      //parts.minify(),
       parts.extractCSS(PATHS.style)
     );
     break;

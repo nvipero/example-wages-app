@@ -2,5 +2,5 @@
 dist/
 node_modules/
 example-wages-app.iml
-npm-debug.log
+npm-debug.log*
 .eslintcache

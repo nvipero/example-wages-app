@@ -1,0 +1,57 @@
+table.wages {
+  margin: 0;
+  font-size: 1em;
+  width: 100%;
+  border: 1px solid #f1f1f1;
+
+  tr {
+    line-height: 15px;
+
+    &:nth-child(even) td {
+      background: #eee;
+    }
+  }
+
+  th, td {
+    padding: 0.7em;
+    vertical-align: top;
+    text-align: left;
+
+    @media (max-width: 550px) {
+      &.extra {
+        display: none;
+      }
+    }
+  }
+
+  td {
+    white-space: nowrap;
+  }
+
+  &.main {
+    tr:hover td {
+      cursor: pointer;
+      background: #ddd;
+    }
+  }
+}
+
+.detailed-work {
+  margin: 10px 0;
+
+  p {
+    margin-bottom: 10px;
+  }
+}
+
+a.back {
+  display: inline-block;
+  cursor: pointer;
+  padding: 10px;
+  border: 1px solid #000;
+  margin-bottom: 20px;
+
+  &:hover {
+    color: #0ea0eb;
+  }
+}
